@@ -92,9 +92,9 @@ let DogPetCost = 10;
 let DogPetMultiplier = 1;
 let DogPetOwned = false;
 
-var hitLog = new Audio("assests/hitLog.wav");
-var clickFail = new Audio("assests/clickFail.wav");
-var buyItem = new Audio("assests/buyItem.wav");
+var hitLog = new Audio("assets/hitLog.wav");
+var clickFail = new Audio("assets/clickFail.wav");
+var buyItem = new Audio("assets/buyItem.wav");
 
 
 // enter name
