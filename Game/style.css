@@ -1,0 +1,90 @@
+body{
+    text-align: center;
+    font-family: "DotGothic16", sans-serif;
+}
+#usernameInputLabel{
+    font-size: 35px;
+}
+
+#Console{
+    display: none;
+}
+
+.itemImage{
+    width: 30px;
+}
+
+.usernameInputBtns{
+    width: 150px;
+    padding: 5px 1px;
+    font-size: 1.5em;
+    color: black;
+    background-color:blanchedalmond;
+    border-radius: 5px;
+    border-style: solid;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+#saveInputLabel{
+    font-size: 35px;
+}
+.saveInputBtns{
+    width: 150px;
+    padding: 5px 1px;
+    font-size: 1.5em;
+    color: black;
+    background-color:blanchedalmond;
+    border-radius: 5px;
+    border-style: solid;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+#mainProgram{
+    display: none;
+}
+
+#saveExport{
+    display:none;
+}
+
+#logCountLabel{
+    display: block;
+    text-align: center;
+    font-size: 100px;
+}
+#logsPerSecondLabel{
+    display: block;
+    text-align: center;
+    font-size: 50px;
+}
+#btnContainer{
+    text-align: center;
+}
+.buttons{
+    padding: 5px 5px;
+    font-size: 1.5em;
+    color: black;
+    background-color:blanchedalmond;
+    border-radius: 5px;
+    border-style: solid;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+.ClickButtons{
+    padding: 5px 5px;
+    border-style: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.buttons:hover{
+    background-color:hsl(33, 100%, 82%);
+}
+.itemLabel{
+    text-align: center;
+    font-size: 30px;
+}
+
+#UpgradeLabel{
+    text-align: center;
+    font-size: 40px;
+}

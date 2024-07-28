@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <title>Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpeg" href="assests/Madeline.jpeg">
+</head>
+<body>
+    <h1 id="h1">Welcome</h1>
+    <div id="usernameSelection">
+        <label id="usernameInputLabel">Username:</label>
+        <br>
+        <input id="usernameInput" class="usernameInputBtns" maxlength="10">
+        <br><br>
+        <button id="usernameSubmit" class="usernameInputBtns">Submit</button>
+    </div>
+    <br><br>
+    <div id="importSave">
+        <label id="saveInputLabel">Save:</label>
+        <br>
+        <input id="saveInput" class="saveInputBtns">
+        <br><br>
+        <button id="saveSubmit" class="saveInputBtns">Submit</button>
+    </div>
+    <div id="mainProgram">
+        <label id="logCountLabel">0</label>
+        <label id="logsPerSecondLabel">0</label><br>
+        <div id="btnContainer">
+            <button id="logBtn" class="ClickButtons"><img src="assests/log.png"> </button>
+            <br><br>
+            <div id="lumberjackContainer">
+                <img src="assests/LumberJack.png" class="itemImage">
+                <button id="buyLJBtn" class="buttons">LumberJack</button>
+                <label id="LJprice" class="itemLabel"> 00 </label>
+                <label class="itemLabel"> - </label>
+                <label id="LJCountLabel" class="itemLabel">0</label>
+            </div>
+            <br>
+            <div id="loggerContainer">
+                <button id="buyLoggerBtn" class="buttons">Logger</button>
+                <label id="Loggerprice" class="itemLabel"> 00 </label>
+                <label class="itemLabel"> - </label>
+                <label id="LoggerCountLabel" class="itemLabel">0</label>
+            </div>
+            <br>
+            <div id="chainsawContainer">
+                <button id="buyChainsawBtn" class="buttons">Chainsaw</button>
+                <label id="Chainsawprice" class="itemLabel"> 00 </label>
+                <label class="itemLabel"> - </label>
+                <label id="ChainsawCountLabel" class="itemLabel">0</label>
+            </div>
+        </div>
+        <br><br><br>
+        <label id="UpgradeLabel">Upgrades:</label>
+        <br><br>
+        <div id="UpgradeContainer">
+            <div id="Upgrade0Container">
+                <img src="assests/CursorUpgrade.png" class="itemImage">
+                <label id="Upgrade0Label" class="itemLabel">Stronger Clicks</label>
+                <button id="Upgrade0Button" class="buttons">50 Logs</button>
+                </div>
+            <div id="Upgrade1Container">
+                <img src="assests/LumberJackUpgrade.png" class="itemImage">
+            <label id="Upgrade1Label" class="itemLabel">Stronger LumberJack</label>
+            <button id="Upgrade1Button" class="buttons">100 Logs</button>
+            </div>
+            <div id="Upgrade2Container">
+                <img src="assests/LoggerUpgrade.png" class="itemImage">
+                <label id="Upgrade2Label" class="itemLabel">Stronger Logger</label>
+                <button id="Upgrade2Button" class="buttons">500 Logs</button>
+            </div>
+            <div id="Upgrade3Container">
+                <img src="assests/ChainsawUpgrade.png" class="itemImage">
+                <label id="Upgrade3Label" class="itemLabel">Bigger Batteries</label>
+                <button id="Upgrade3Button" class="buttons">2500 Logs</button>
+            </div>
+        </div>
+        <div id="Baguette">
+            <button id="baguetteBtn" class="ClickButtons"><img src="assests/Baguette.png" id="BaguetteImg"></button>
+        </div>
+    </div>
+    <br><br>
+    <div id="Console">
+        <Label>Console</Label>
+        <input id="consoleInput">
+        <button id="consoleSubmit">Enter</button>
+    </div>
+    <br><br>
+    <div id="saveExport">
+        <label id="saveExportLabel">Save (refreshes every 10 seconds):</label>
+        <p id="saveExportParagraph"></p>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
