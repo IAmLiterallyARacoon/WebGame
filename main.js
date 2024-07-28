@@ -134,7 +134,8 @@ document.getElementById("saveSubmit").onclick = function(){
     Upgrade4Amount = Number(saveData[19])
     coins = Number(saveData[16]);
     logsToCoins = Number(saveData[17]);
-    DogPetOwned = Boolean(saveData[19])
+    DogPetOwned = Boolean(saveData[19]);
+    Upgrade0Amount = Boolean(saveData[20]);
     document.getElementById("h1").textContent = `Welcome ${username}`;
     updateGame();
     document.getElementById("usernameSelection").style.display = "none";
@@ -291,10 +292,10 @@ function updateLogsPerSecond(){
 
 let saveExportData;
 
-// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount, coins, coins cost, dog pet owned
+// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount, coins, coins cost, dog pet owned, upgrade 0 amount
 
 function updateSave(){
-    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},00,00,${Chainsaws},${ChainsawProduce},00,${Upgrade3Amount},${woodchucks},${woodchuckProduce},00,${Upgrade4Amount},${coins},${logsToCoins},${DogPetOwned}`;
+    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},00,00,${Chainsaws},${ChainsawProduce},00,${Upgrade3Amount},${woodchucks},${woodchuckProduce},00,${Upgrade4Amount},${coins},${logsToCoins},${DogPetOwned},${Upgrade0Amount}`;
     document.getElementById("saveExportParagraph").textContent = saveExportData;
 }
 
