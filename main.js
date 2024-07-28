@@ -194,7 +194,7 @@ updateGame();
 // game loop (every second)
 
 function gameLoop(){
-    logCount = logCount + (Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce);
+    logCount = logCount + (Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce) + (woodchucks*woodchuckProduce);
 }
 
 function updateGame(){
