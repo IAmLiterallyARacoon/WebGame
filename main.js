@@ -44,8 +44,8 @@ let Upgrade3Amount = 0;
 let Upgrade3BaseCost = 2500;
 let Upgrade3Cost;
 
-const Upgrade4Button = document.getElementById("Upgrade3Button");
-const Upgrade4Label = document.getElementById("Upgrade3Label");
+const Upgrade4Button = document.getElementById("Upgrade4Button");
+const Upgrade4Label = document.getElementById("Upgrade4Label");
 let Upgrade4Amount = 0;
 let Upgrade4BaseCost = 10000;
 let Upgrade4Cost;
