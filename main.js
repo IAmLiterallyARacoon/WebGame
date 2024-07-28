@@ -211,7 +211,7 @@ updateGame();
 // game loop (every second)
 
 function gameLoop(){
-    logCount = Math.round((DogPetMultiplier) * (logCount + (Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce) + (woodchucks*woodchuckProduce)));
+    logCount = logCount + Math.round((DogPetMultiplier) * ((Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce) + (woodchucks*woodchuckProduce)));
 }
 
 function updateGame(){
