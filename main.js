@@ -85,6 +85,13 @@ let woodchucks = 0;
 let baseWoodchuckProduce = 16;
 let woodchuckProduce;
 
+// pets
+
+const DogPetButton = document.getElementById("DogPetButton");
+let DogPetCost = 10;
+let DogPetMultiplier = 1;
+let DogPetOwned = false;
+
 var hitLog = new Audio("assests/hitLog.wav");
 var clickFail = new Audio("assests/clickFail.wav");
 var buyItem = new Audio("assests/buyItem.wav");
@@ -103,7 +110,7 @@ document.getElementById("usernameSubmit").onclick = function(){
 }
 // import save
 
-// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, LJ price, Loggers price, Chainsaws, chainsaw produce, chainsaw price, upgrade 3 amount, blank
+// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount, coins, coins cost, dog pet owned
 
 let saveData;
 
@@ -125,6 +132,9 @@ document.getElementById("saveSubmit").onclick = function(){
     woodchucks = Number(saveData[16]);
     woodchuckProduce = Number(saveData[17]);
     Upgrade4Amount = Number(saveData[19])
+    coins = Number(saveData[16]);
+    logsToCoins = Number(saveData[17]);
+    DogPetOwned = Boolean(saveData[19])
     document.getElementById("h1").textContent = `Welcome ${username}`;
     updateGame();
     document.getElementById("usernameSelection").style.display = "none";
@@ -201,10 +211,15 @@ updateGame();
 // game loop (every second)
 
 function gameLoop(){
-    logCount = logCount + (Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce) + (woodchucks*woodchuckProduce);
+    logCount = Math.round((DogPetMultiplier) * (logCount + (Loggers*LoggerProduce) + (Chainsaws*ChainsawProduce) + (woodchucks*woodchuckProduce)));
 }
 
 function updateGame(){
+    if (DogPetOwned){
+        DogPetMultiplier = 1.1;
+        document.getElementById("DogPetContainer").style.display = "none";
+    }
+
     logCountLabel.textContent = logCount;
 
     LoggerCountLabel.textContent = Loggers;
@@ -247,7 +262,7 @@ function updateGame(){
     document.getElementById("Upgrade4Button").textContent = Upgrade4Cost;
 
     CoinsAmountLabel.textContent = coins;
-    CoinsBuyBtn.textContent = logsToCoins;
+    CoinsBuyBtn.textContent = logsToCoins + " logs";
     updateLogsPerSecond()
 }
 
@@ -269,17 +284,17 @@ function tenSecondLoop(){
     updateSave()
 }
 function updateLogsPerSecond(){    
-    logsPerSecond = (LJ * LJProduce * 0.1) + (Loggers * LoggerProduce) + (Chainsaws * ChainsawProduce) + (woodchucks * woodchuckProduce)
+    logsPerSecond = Math.round((DogPetMultiplier) * 10 * ((LJ * LJProduce * 0.1) + (Loggers * LoggerProduce) + (Chainsaws * ChainsawProduce) + (woodchucks * woodchuckProduce))) / 10;
     logsPerSecond = (Math.round(logsPerSecond * 10)) / 10
     logsPerSecondLabel.textContent = logsPerSecond;
 }
 
 let saveExportData;
 
-// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount
+// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount, coins, coins cost, dog pet owned
 
 function updateSave(){
-    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},00,00,${Chainsaws},${ChainsawProduce},00,${Upgrade3Amount},${woodchucks},${woodchuckProduce},00,${Upgrade4Amount}`;
+    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},00,00,${Chainsaws},${ChainsawProduce},00,${Upgrade3Amount},${woodchucks},${woodchuckProduce},00,${Upgrade4Amount},${coins},${logsToCoins},${DogPetOwned}`;
     document.getElementById("saveExportParagraph").textContent = saveExportData;
 }
 
@@ -417,6 +432,21 @@ Upgrade4Button.onclick = function(){
     if (logCount >= Upgrade4Cost){
         logCount = logCount - Upgrade4Cost;
         Upgrade4Amount++;
+        buyItem.currentTime=0;
+        buyItem.play();
+        updateGame();
+    }
+    else{
+        clickFail.play();
+    }
+}
+
+// pets
+
+DogPetButton.onclick = function(){
+    if (coins >= DogPetCost){
+        coins = coins - DogPetCost;
+        DogPetOwned = true;
         buyItem.currentTime=0;
         buyItem.play();
         updateGame();
