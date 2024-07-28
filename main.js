@@ -54,6 +54,13 @@ let Upgrade4Cost;
 let logsPerSecond = 0;
 let logCount = 0;
 
+const CoinsAmountLabel = document.getElementById("CoinsAmount")
+const CoinsBuyLabel = document.getElementById("CoinsBuyLabel")
+const CoinsBuyBtn = document.getElementById("CoinsBuyBtn")
+let coins = 0;
+let logsToCoins = 100;
+let increaseNT = false;
+
 let LJBaseCost = 12;
 let LJCost;
 let LJ = 0;
@@ -238,11 +245,27 @@ function updateGame(){
     document.getElementById("Upgrade2Button").textContent = Upgrade2Cost;
     document.getElementById("Upgrade3Button").textContent = Upgrade3Cost;
     document.getElementById("Upgrade4Button").textContent = Upgrade4Cost;
+
+    CoinsAmountLabel.textContent = coins;
+    CoinsBuyBtn.textContent = logsToCoins;
     updateLogsPerSecond()
 }
 
 function tenSecondLoop(){
     logCount = logCount + (LJ*LJProduce)
+    if (increaseNT){
+        logsToCoins = logsToCoins + Math.floor((Math.random() * 60))
+    }
+    else{
+        logsToCoins = logsToCoins + Math.floor((Math.random() * 40) - 20)
+    }
+    if (logsToCoins < 10){
+        logsToCoins = 10;
+        increaseNT = true
+    }
+    else if (logsToCoins < 40){
+        increaseNT = true
+    }
     updateSave()
 }
 function updateLogsPerSecond(){    
@@ -268,6 +291,19 @@ logBtn.onclick = function(){
     logCountLabel.textContent = logCount;
 }
 
+CoinsBuyBtn.onclick = function(){
+    if (logCount >= logsToCoins){
+        logCount = logCount - logsToCoins
+        coins++
+        buyItem.currentTime=0;
+        updateGame()
+        buyItem.play();
+    }
+    else{
+        clickFail.currentTime=0;
+        clickFail.play();
+    }
+}
 
 buyLJBtn.onclick = function(){
     if (logCount >= LJCost){
