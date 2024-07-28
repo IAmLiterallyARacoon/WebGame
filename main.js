@@ -54,22 +54,26 @@ let Upgrade4Cost;
 let logsPerSecond = 0;
 let logCount = 0;
 
-let LJCost = 12
+let LJBaseCost = 12;
+let LJCost;
 let LJ = 0;
 let baseLJProduce = 1;
 let LJProduce;
 
-let LoggerCost = 80
+let LoggerBaseCost = 80
+let LoggerCost;
 let Loggers = 0;
 let baseLoggerProduce = 1;
 let LoggerProduce;
 
-let ChainsawCost = 500
+let ChainsawBaseCost = 500
+let ChainsawCost;
 let Chainsaws = 0;
 let baseChainsawProduce = 5;
 let ChainsawProduce;
 
-let woodchuckCost = 3000
+let woodchuckBaseCost = 3000
+let woodchuckCost;
 let woodchucks = 0;
 let baseWoodchuckProduce = 16;
 let woodchuckProduce;
@@ -108,18 +112,14 @@ document.getElementById("saveSubmit").onclick = function(){
     Upgrade2Amount = Number(saveData[5]);
     LJProduce = Number(saveData[8]);
     LoggerProduce = Number(saveData[9]);
-    LJCost = Number(saveData[10]);
-    LoggerCost = Number(saveData[11]);
     Chainsaws = Number(saveData[12]);
     ChainsawProduce = Number(saveData[13]);
-    ChainsawCost = Number(saveData[14]);
     Upgrade3Amount = Number(saveData[15])
     woodchucks = Number(saveData[16]);
     woodchuckProduce = Number(saveData[17]);
-    woodchuckprice = Number(saveData[18]);
     Upgrade4Amount = Number(saveData[19])
     document.getElementById("h1").textContent = `Welcome ${username}`;
-    gameLoop();
+    updateGame();
     document.getElementById("usernameSelection").style.display = "none";
     document.getElementById("importSave").style.display = "none";
     document.getElementById("mainProgram").style.display = "block";
@@ -134,21 +134,57 @@ document.getElementById("consoleSubmit").onclick = function(){
     consoleInput1 = consoleInput1.toLowerCase();
     give = false
     remove = false
+    lumberjack = false
+    logger = false
+    chainsaw = false
+    woodchuck = false
     give = consoleInput1.includes("give");
     remove = consoleInput1.includes("remove");
+    lumberjack = consoleInput1.includes("lumberjack");
+    logger = consoleInput1.includes("logger");
+    chainsaw = consoleInput1.includes("chainsaw");
+    woodchuck = consoleInput1.includes("woodchuck");
     if (give){
-        consoleInput1 = consoleInput1.slice(5,40);
+        consoleInput1 = consoleInput1.slice(5,400);
         consoleInput1 = consoleInput1.trim();
         console.log(consoleInput1)
         consoleInput1 = Number(consoleInput1);
         logCount = logCount + consoleInput1;
     }
     else if(remove){
-        consoleInput1 = consoleInput1.slice(7,40);
+        consoleInput1 = consoleInput1.slice(7,400);
         consoleInput1 = consoleInput1.trim();
         console.log(consoleInput1)
         consoleInput1 = Number(consoleInput1);
         logCount = logCount - consoleInput1;
+    }
+    else if(lumberjack){
+        consoleInput1 = consoleInput1.slice(11,400);
+        consoleInput1 = consoleInput1.trim();
+        console.log(consoleInput1)
+        consoleInput1 = Number(consoleInput1);
+        LJ = LJ + consoleInput1;
+    }
+    else if(logger){
+        consoleInput1 = consoleInput1.slice(7,400);
+        consoleInput1 = consoleInput1.trim();
+        console.log(consoleInput1)
+        consoleInput1 = Number(consoleInput1);
+        Loggers = Loggers + consoleInput1;
+    }
+    else if(chainsaw){
+        consoleInput1 = consoleInput1.slice(9,400);
+        consoleInput1 = consoleInput1.trim();
+        console.log(consoleInput1)
+        consoleInput1 = Number(consoleInput1);
+        Chainsaws = Chainsaws + consoleInput1;
+    }
+    else if(woodchuck){
+        consoleInput1 = consoleInput1.slice(10,400);
+        consoleInput1 = consoleInput1.trim();
+        console.log(consoleInput1)
+        consoleInput1 = Number(consoleInput1);
+        woodchucks = woodchucks + consoleInput1;
     }
     updateGame()
 }
@@ -186,6 +222,17 @@ function updateGame(){
     Upgrade2Cost = Math.round(Upgrade2BaseCost * Math.pow(2,Upgrade2Amount));
     Upgrade3Cost = Math.round(Upgrade3BaseCost * Math.pow(2,Upgrade3Amount));
     Upgrade4Cost = Math.round(Upgrade4BaseCost * Math.pow(2,Upgrade4Amount));
+
+    LJCost = Math.round(LJBaseCost * Math.pow(1.15,LJ));
+    LoggerCost = Math.round(LoggerBaseCost * Math.pow(1.15,Loggers));
+    ChainsawCost = Math.round(ChainsawBaseCost * Math.pow(1.15,Chainsaws));
+    woodchuckCost = Math.round(woodchuckBaseCost * Math.pow(1.15,woodchucks));
+
+    LJprice.textContent = LJCost;
+    Loggerprice.textContent = LoggerCost;
+    Chainsawprice.textContent = ChainsawCost;
+    Woodchuckprice.textContent = woodchuckCost;
+
     document.getElementById("Upgrade0Button").textContent = Upgrade0Cost;
     document.getElementById("Upgrade1Button").textContent = Upgrade1Cost;
     document.getElementById("Upgrade2Button").textContent = Upgrade2Cost;
@@ -206,10 +253,10 @@ function updateLogsPerSecond(){
 
 let saveExportData;
 
-// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, LJ price, Loggers price, Chainsaws, chainsaw produce, chainsaw price, upgrade 3 amount, woodchucks, woodchuck produce, woodchuck price, upgrade 4 amount
+// username, logs, LJ, Loggers, Upgrade 1 amount, Upgrade 2 amount, blank, blank, LJ produce, Loggers produce, blank, blank, Chainsaws, chainsaw produce, blank, upgrade 3 amount, woodchucks, woodchuck produce, blank, upgrade 4 amount
 
 function updateSave(){
-    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},${LJCost},${LoggerCost},${Chainsaws},${ChainsawProduce},${ChainsawCost},${Upgrade3Amount},${woodchucks},${woodchuckProduce},${woodchuckCost},${Upgrade4Amount}`;
+    saveExportData = `${username},${logCount},${LJ},${Loggers},${Upgrade1Amount},${Upgrade2Amount},00,00,${LJProduce},${LoggerProduce},00,00,${Chainsaws},${ChainsawProduce},00,${Upgrade3Amount},${woodchucks},${woodchuckProduce},00,${Upgrade4Amount}`;
     document.getElementById("saveExportParagraph").textContent = saveExportData;
 }
 
@@ -226,11 +273,9 @@ buyLJBtn.onclick = function(){
     if (logCount >= LJCost){
         logCount = logCount - LJCost
         LJ++
-        LJCost = Math.round(LJCost * 1.15)
-        LJprice.textContent = LJCost;
         buyItem.currentTime=0;
-        buyItem.play();
         updateGame()
+        buyItem.play();
     }
     else{
         clickFail.currentTime=0;
@@ -241,8 +286,6 @@ buyLoggerBtn.onclick = function(){
     if (logCount >= LoggerCost){
         logCount = logCount - LoggerCost
         Loggers++
-        LoggerCost = Math.round(LoggerCost * 1.15)
-        Loggerprice.textContent = LoggerCost;
         buyItem.currentTime=0;
         buyItem.play();
         updateGame()
@@ -257,8 +300,6 @@ buyChainsawBtn.onclick = function(){
     if (logCount >= ChainsawCost){
         logCount = logCount - ChainsawCost
         Chainsaws++
-        ChainsawCost = Math.round(ChainsawCost * 1.15)
-        Chainsawprice.textContent = ChainsawCost;
         buyItem.currentTime=0;
         buyItem.play();
         updateGame();
@@ -273,8 +314,6 @@ buywoodchuckBtn.onclick = function(){
     if (logCount >= woodchuckCost){
         logCount = logCount - woodchuckCost
         woodchucks++
-        woodchuckCost = Math.round(woodchuckCost * 1.15)
-        Woodchuckprice.textContent = woodchuckCost;
         buyItem.currentTime=0;
         buyItem.play();
         updateGame();
