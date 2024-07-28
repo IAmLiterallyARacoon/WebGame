@@ -7,7 +7,6 @@ const logsPerSecondLabel = document.getElementById("logsPerSecondLabel");
 let baseLogsFromClick = 1;
 let logsFromClick;
 
-const baguetteBtn = document.getElementById("baguetteBtn");
 
 const buyLJBtn = document.getElementById("buyLJBtn");
 const LJCountLabel = document.getElementById("LJCountLabel");
@@ -187,13 +186,6 @@ function updateSave(){
 
 
 logBtn.onclick = function(){
-    logCount = logCount + (logsFromClick);
-    hitLog.currentTime=0;
-    hitLog.play();
-    logCountLabel.textContent = logCount;
-}
-
-baguetteBtn.onclick = function(){
     logCount = logCount + (logsFromClick);
     hitLog.currentTime=0;
     hitLog.play();
